@@ -1,0 +1,4 @@
+.mvn
+.vscode
+.gitignore
+mvnw*
