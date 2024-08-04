@@ -2,8 +2,6 @@ package com.io.industry.industria.domain.entity;
 
 import java.util.List;
 
-import com.io.industry.industria.domain.entity.machines.Machine;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

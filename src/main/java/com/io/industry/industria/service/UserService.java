@@ -2,8 +2,8 @@ package com.io.industry.industria.service;
 
 import java.util.List;
 
+import com.io.industry.industria.domain.entity.Machine;
 import com.io.industry.industria.domain.entity.User;
-import com.io.industry.industria.domain.entity.machines.Machine;
 import com.io.industry.industria.rest.dto.UserDTO;
 
 public interface UserService {

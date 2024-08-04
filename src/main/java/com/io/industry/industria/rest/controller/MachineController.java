@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.io.industry.industria.domain.entity.Machine;
+import com.io.industry.industria.domain.entity.MachineInfo;
 import com.io.industry.industria.domain.entity.Notification;
-import com.io.industry.industria.domain.entity.machines.Machine;
-import com.io.industry.industria.domain.entity.machines.MachineInfo;
 import com.io.industry.industria.domain.enums.Alert;
 import com.io.industry.industria.rest.dto.MachineDTO;
 import com.io.industry.industria.service.MachineService;

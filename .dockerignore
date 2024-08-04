@@ -1,4 +1,5 @@
 .mvn
 .vscode
 .gitignore
+HELP.md
 mvnw*

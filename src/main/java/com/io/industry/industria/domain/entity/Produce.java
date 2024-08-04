@@ -1,7 +1,6 @@
-package com.io.industry.industria.domain.entity.machines;
+package com.io.industry.industria.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.io.industry.industria.domain.entity.AbstractMachine;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +32,7 @@ public class Produce {
     @ManyToOne
     @JoinColumn(name = "machine")
     @JsonIgnore
-    private AbstractMachine machine;
+    private Machine machine;
 
     @Column(name = "name")
     private String name;

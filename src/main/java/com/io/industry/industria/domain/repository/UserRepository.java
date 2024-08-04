@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.io.industry.industria.domain.entity.Machine;
 import com.io.industry.industria.domain.entity.User;
-import com.io.industry.industria.domain.entity.machines.Machine;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{

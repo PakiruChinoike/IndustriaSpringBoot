@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.io.industry.industria.domain.entity.machines.Produce;
+import com.io.industry.industria.domain.entity.Produce;
 
 @Repository
 public interface ProduceRepository extends JpaRepository<Produce, Long>{

@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.io.industry.industria.domain.entity.machines.Machine;
-import com.io.industry.industria.domain.entity.machines.MachineInfo;
-import com.io.industry.industria.domain.entity.machines.Produce;
+import com.io.industry.industria.domain.entity.Machine;
+import com.io.industry.industria.domain.entity.MachineInfo;
+import com.io.industry.industria.domain.entity.Produce;
 import com.io.industry.industria.domain.enums.Status;
 import com.io.industry.industria.domain.repository.MachineInfoRepository;
 import com.io.industry.industria.domain.repository.MachineRepository;
@@ -182,12 +182,11 @@ public class MachineServiceImpl implements MachineService{
             .model(dto.getModel())
             .produce(listProduce)
             .currentProduce(currentP)
+            .status(Status.OFF)
+            .minuteRunning(0)
+            .offTime(LocalDateTime.now())
+            .currentInfo(info)
             .build();
-
-        machine.setStatus(Status.OFF);
-        machine.setMinuteRunning(0);
-        machine.setOffTime(LocalDateTime.now());
-        machine.setCurrentInfo(info);
 
         return machine;
     }

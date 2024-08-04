@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.io.industry.industria.domain.entity.AbstractMachine;
-import com.io.industry.industria.domain.entity.machines.Produce;
+import com.io.industry.industria.domain.entity.Machine;
+import com.io.industry.industria.domain.entity.Produce;
 import com.io.industry.industria.domain.repository.MachineRepository;
 import com.io.industry.industria.domain.repository.ProduceRepository;
 import com.io.industry.industria.exception.ServiceRuleException;
@@ -73,14 +73,17 @@ public class ProduceServiceImpl implements ProduceService{
             id
         ).orElseThrow(
             () -> new ServiceRuleException("Id de produto não encontrado"));
+        dbProduce.setId(null);
+        dbProduce.setMachine(null);
         
         Produce dtoProduce = objectFromDto(dto);
+        dtoProduce.setMachine(null);
 
         return dbProduce==dtoProduce;
     }
 
     private Produce objectFromDto(ProduceDTO dto) {
-        AbstractMachine machine = machineRepository.findById(
+        Machine machine = machineRepository.findById(
             dto.getMachineId()
         ).orElseThrow(() -> new ServiceRuleException("Id de máquina não encontrado."));
 

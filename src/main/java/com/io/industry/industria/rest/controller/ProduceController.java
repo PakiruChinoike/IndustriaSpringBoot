@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.io.industry.industria.domain.entity.Notification;
-import com.io.industry.industria.domain.entity.machines.Produce;
+import com.io.industry.industria.domain.entity.Produce;
 import com.io.industry.industria.domain.enums.Alert;
 import com.io.industry.industria.rest.dto.ProduceDTO;
 import com.io.industry.industria.service.ProduceService;

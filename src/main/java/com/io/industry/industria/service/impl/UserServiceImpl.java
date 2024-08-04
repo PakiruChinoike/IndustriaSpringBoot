@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.io.industry.industria.domain.entity.Machine;
 import com.io.industry.industria.domain.entity.User;
-import com.io.industry.industria.domain.entity.machines.Machine;
 import com.io.industry.industria.domain.repository.UserRepository;
 import com.io.industry.industria.exception.ServiceRuleException;
 import com.io.industry.industria.rest.dto.UserDTO;

@@ -2,7 +2,7 @@ package com.io.industry.industria.service;
 
 import java.util.List;
 
-import com.io.industry.industria.domain.entity.machines.Produce;
+import com.io.industry.industria.domain.entity.Produce;
 import com.io.industry.industria.rest.dto.ProduceDTO;
 
 public interface ProduceService {

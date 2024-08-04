@@ -1,4 +1,4 @@
-package com.io.industry.industria.domain.entity.machines;
+package com.io.industry.industria.domain.entity;
 
 import java.time.LocalDateTime;
 
