@@ -43,62 +43,62 @@ public class MachineController {
     }
     
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public Machine getMachineById(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    @GetMapping
+    @GetMapping("/public")
     public List<Machine> getAllMachine() {
         return service.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/private")
     @ResponseStatus(CREATED)
     public Machine postMachine(@RequestBody @Valid MachineDTO dto) {
         return service.save(dto);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/private/{id}")
     @ResponseStatus(CREATED)
     public void updateMachine(@RequestBody MachineDTO dto, @PathVariable Long id) {
         service.update(dto, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/private/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleteMachine(@PathVariable Long id) {
         service.delete(id);
     }
 
-    @PutMapping("/off/{id}")
+    @PutMapping("/public/off/{id}")
     @ResponseStatus(CREATED)
     public Notification turnOff(@PathVariable Long id) {
         service.turnOff(id);
         return new Notification(Alert.OFF, id);
     }
 
-    @PutMapping("/on/{id}")
+    @PutMapping("/public/on/{id}")
     @ResponseStatus(CREATED)
     public Notification turnOn(@PathVariable Long id) {
         service.turnOn(id);
         return new Notification(Alert.ON, id);
     }
 
-    @PutMapping("/info/{id}")
+    @PutMapping("/private/info/{id}")
     @ResponseStatus(CREATED)
     public Machine updateInfo(@RequestBody @Valid MachineInfo info, @PathVariable Long id) {
         return service.updateInfo(info, id);
     }
 
-    @PutMapping("/current/{id}")
+    @PutMapping("/public/current/{id}")
     @ResponseStatus(CREATED)
     public Machine updateProduce(@RequestBody MachineDTO dto, @PathVariable Long id) {
         return service.updateProduce(
             dto.getCurrentProduceId(), id);
     }
 
-    @PutMapping("/list/{id}")
+    @PutMapping("/public/list/{id}")
     @ResponseStatus(CREATED)
     public Machine updateProduceList(@RequestBody MachineDTO dto, @PathVariable Long id) {
         return service.updateProduceList(

@@ -6,7 +6,7 @@ formCadastro.addEventListener('submit', async function(event){
     const formData = new FormData(formCadastro);
 
     try{
-        const response = await fetch ('localhost:8081/api/user',{
+        const response = await fetch ('localhost:8081/api/public/user',{
             method: 'POST',
             body: formData
         });

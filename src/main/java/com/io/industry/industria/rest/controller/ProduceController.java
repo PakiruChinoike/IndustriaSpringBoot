@@ -29,35 +29,35 @@ public class ProduceController {
     @Autowired
     private ProduceService service;
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public Produce getProduceById(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    @GetMapping("/machine/{id}")
+    @GetMapping("/public/machine/{id}")
     public List<Produce> getProduceByMachine(@PathVariable Long id) {
         return service.findByMachineId(id);
     }
 
-    @PostMapping
+    @PostMapping("/private")
     @ResponseStatus(CREATED)
     public Produce postProduce(@RequestBody @Valid ProduceDTO dto) {
         return service.save(dto);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/private/{id}")
     @ResponseStatus(CREATED)
     public void updateProduce(@RequestBody ProduceDTO dto, @PathVariable Long id) {
         service.update(dto, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/private/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleteProduce(@PathVariable Long id) {
         service.delete(id);
     }
 
-    @GetMapping("/match/{id}")
+    @GetMapping("/public/match/{id}")
     public Notification match(@RequestBody ProduceDTO dto, @PathVariable Long id) {
         boolean isMatch = service.match(dto, id);
         if(isMatch) {

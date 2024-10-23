@@ -1,8 +1,9 @@
 //RECEBE UM ID DE PRODUTO
 export function getById(id) {
     var request = new XMLHttpRequest();
-    request.open('GET', `http://localhost:8081/api/produce/${id}`, true);
+    request.open('GET', `http://localhost:8081/api/produce/public/${id}`, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    request.setRequestHeader('Authorization', + auth);
     
     request.onload = () => {
         var data = JSON.parse(this.response);
@@ -19,8 +20,9 @@ export function getById(id) {
 //RECEBE UM ID DE MÁQUINA
 export function getByMachine(id) {
     var request = new XMLHttpRequest();
-    request.open('GET', `http://localhost:8081/api/produce/machine/${id}`, true);
+    request.open('GET', `http://localhost:8081/api/produce/public/machine/${id}`, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    request.setRequestHeader('Authorization', + auth);
     
     request.onload = () => {
         var data = JSON.parse(this.response);
@@ -35,17 +37,18 @@ export function getByMachine(id) {
 }
 
 //RECEBE UM CORPO DE PRODUTO
-export function postProduce() {
+export function postProduce(machineId, name, xLength, zLength, yLength) {
     var request = new XMLHttpRequest();
-    request.open('POST', 'http://localhost:8081/api/produce', true);
+    request.open('POST', 'http://localhost:8081/api/produce/private', true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    request.setRequestHeader('Authorization', + auth);
 
     var body = JSON.stringify({
-        machineId: 1,
-        name: "name",
-        xLength: 4,
-        zLength: 4, 
-        yLength: 5
+        machineId: machineId, 
+        name: name,
+        xLength: xLength,
+        zLength: zLength, 
+        yLength: yLength
     });
 
     request.onload = () => {
@@ -60,17 +63,18 @@ export function postProduce() {
 }
 
 //RECEBE UM CORPO DE PRODUTO E UM ID DE PRODUTO
-export function updateProduce(id) {
+export function updateProduce(id, machineId, name, xLength, zLength, yLength) {
     var request = new XMLHttpRequest();
-    request.open('POST', `http://localhost:8081/api/produce/${id}`, true);
+    request.open('POST', `http://localhost:8081/api/produce/private/${id}`, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    request.setRequestHeader('Authorization', + auth);
 
     var body = JSON.stringify({
-        machineId: 2,
-        name: "nameUpdate",
-        xLength: 2,
-        zLength: 2, 
-        yLength: 3
+        machineId: machineId,
+        name: name,
+        xLength: xLength,
+        zLength: zLength, 
+        yLength: yLength
     });
 
     request.onload = () => {
@@ -87,8 +91,9 @@ export function updateProduce(id) {
 //RECEBE UM ID DE PRODUTO
 export function deleteProduce(id) {
     var request = new XMLHttpRequest();
-    request.open('DELETE', `http://localhost:8081/api/produce/${id}`, true);
+    request.open('DELETE', `http://localhost:8081/api/produce/private/${id}`, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    request.setRequestHeader('Authorization', + auth);
 
     request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
@@ -102,17 +107,17 @@ export function deleteProduce(id) {
 }
 
 //RECEBE UM CORPO DE PRODUTO E UM ID DE MÁQUINA
-export function matchProduce(id) {
+export function matchProduce(id, machineId, name, xLength, zLength, yLength) {
     var request = new XMLHttpRequest();
-    request.open('GET', `http://localhost:8081/api/produce/match/${id}`, true);
+    request.open('GET', `http://localhost:8081/api/produce/public/match/${id}`, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     var body = JSON.stringify({
-        machineId: 2,
-        name: "nameUpdate",
-        xLength: 2,
-        zLength: 2, 
-        yLength: 3
+        machineId: machineId,
+        name: name,
+        xLength: xLength,
+        zLength: zLength, 
+        yLength: yLength
     });
 
     request.onload = () => {

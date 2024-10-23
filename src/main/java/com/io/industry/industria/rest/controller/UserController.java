@@ -27,39 +27,39 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/{id}")
+    @GetMapping("/private/{id}")
     public User getUserById(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    @GetMapping()
+    @GetMapping("/private")
     public List<User> getAllUser() {
         return service.findAll();
     }
 
-    @GetMapping("/username")
+    @GetMapping("/private/username")
     public List<User> getUserByUsernameLike(@RequestBody UserDTO dto) {
         return service.findByUsernameLike(dto.getUsername());
     }
 
-    @GetMapping("/email")
+    @GetMapping("/private/email")
     public User getUserByEmail(@RequestBody UserDTO dto) {
         return service.findByEmail(dto.getEmail());
     }
 
-    @PostMapping
+    @PostMapping("/public")
     @ResponseStatus(CREATED)
     public User postUser(@RequestBody @Valid UserDTO dto) {
         return service.save(dto);
     } 
 
-    @PostMapping("/{id}")
+    @PostMapping("/public/{id}")
     @ResponseStatus(CREATED)
     public void updateUser(@RequestBody UserDTO dto, @PathVariable Long id) {
         service.update(dto, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/public/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleteUser(@PathVariable Long id) {
         service.delete(id);

@@ -21,9 +21,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .authorizeHttpRequests(customizer -> {
-                customizer.requestMatchers("/public").permitAll();
+                customizer.requestMatchers("/public").authenticated();
                 customizer.requestMatchers("/private").hasRole("ADMIN");
-                customizer.anyRequest().authenticated();
+                customizer.anyRequest().hasRole("USER");
             })
             .httpBasic(Customizer.withDefaults())
             .formLogin(Customizer.withDefaults())    
@@ -34,7 +34,7 @@ public class SecurityConfiguration {
     public UserDetailsService userDetailsService() {
         UserDetails commonUser = User.builder()
             .username("user")
-            .password(passwordEncoder().encode("123"))
+            .password(passwordEncoder().encode("common"))
             .roles("USER")
             .build();
 
