@@ -37,6 +37,16 @@ public class MachineServiceImpl implements MachineService{
     }
 
     @Override
+    public List<Machine> findByUserId(Long id) {
+        return repository.findByUserId(id);
+    }
+
+    @Override
+    public List<Machine> findByUserEmail(String email) {
+        return repository.findByUserEmail(email);
+    }
+
+    @Override
     public List<Machine> findAll() {
         return repository.findAll();
     }

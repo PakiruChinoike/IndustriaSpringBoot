@@ -47,7 +47,7 @@ public class UserController {
         return service.findByEmail(dto.getEmail());
     }
 
-    @PostMapping("/public")
+    @PostMapping
     @ResponseStatus(CREATED)
     public User postUser(@RequestBody @Valid UserDTO dto) {
         return service.save(dto);

@@ -21,12 +21,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .authorizeHttpRequests(customizer -> {
-                customizer.requestMatchers("/public").authenticated();
-                customizer.requestMatchers("/private").hasRole("ADMIN");
-                customizer.anyRequest().hasRole("USER");
+                customizer.anyRequest().permitAll();
             })
             .httpBasic(Customizer.withDefaults())
-            .formLogin(Customizer.withDefaults())    
+            .formLogin(Customizer.withDefaults())
+            .csrf(customizer -> {
+                customizer.disable();
+            })
             .build();
     }
 

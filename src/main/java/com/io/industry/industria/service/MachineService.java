@@ -9,6 +9,8 @@ import com.io.industry.industria.rest.dto.MachineDTO;
 public interface MachineService {
     
     Machine findById(Long id);
+    List<Machine> findByUserId(Long id);
+    List<Machine> findByUserEmail(String email);
     List<Machine> findAll();
     Machine save(MachineDTO dto);
     void update(MachineDTO dto, Long id);

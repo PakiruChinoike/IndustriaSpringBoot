@@ -5,7 +5,6 @@ import static org.springframework.http.HttpStatus.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,20 +31,19 @@ public class MachineController {
     @Autowired
     private MachineService service;
 
-    @GetMapping("/public")
-    public ResponseEntity<String> publicRoute() {
-        return ResponseEntity.ok("");
-    }
-
-    @GetMapping("/private")
-    public ResponseEntity<String> privateRoute() {
-        return ResponseEntity.ok("");
-    }
-    
-
     @GetMapping("/public/{id}")
     public Machine getMachineById(@PathVariable Long id) {
         return service.findById(id);
+    }
+
+    @GetMapping("/public/user/{id}")
+    public List<Machine> getMachineByUserId(@PathVariable Long id) {
+        return service.findByUserId(id);
+    }
+
+    @GetMapping("/public/email/{email}")
+    public List<Machine> getMachineByUserEmail(@PathVariable String email) {
+        return service.findByUserEmail(email);
     }
 
     @GetMapping("/public")

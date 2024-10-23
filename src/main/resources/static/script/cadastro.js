@@ -1,26 +1,54 @@
-const formCadastro = document.getElementById('formCadastro');
+window.addEventListener("DOMContentLoaded", (e) => {
+    const formCadastro = document.getElementById("formCadastro");
 
-formCadastro.addEventListener('submit', async function(event){
-    event.preventDefault();
+    if (formCadastro) {
 
-    const formData = new FormData(formCadastro);
+        formCadastro.addEventListener('submit', async function(event){
+            event.preventDefault();
+    
+            const formData = new FormData(formCadastro);
+    
+            var username = formData.get("inputName");
+            var email = formData.get("inputEmail");
+            var password = formData.get("inputPassword");
 
-    try{
-        const response = await fetch ('localhost:8081/api/public/user',{
-            method: 'POST',
-            body: formData
+            var status = postUser(username, email, password);
+
+            localStorage.setItem("usuario", email);
+            console.log(localStorage.getItem("usuario"));
+
+            console.log(status);
+
         });
+    }
+})
 
-        if(response.ok){
-            alert('Cadastro realizado com sucesso!');
-            window.location.href = 'index.html';
+
+function postUser(username, email, password) {
+    var request = new XMLHttpRequest();
+    request.open('POST', 'http://localhost:8081/api/user', true);
+    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    // request.setRequestHeader('Authorization', + auth);
+
+    var body = JSON.stringify({
+        username: username,
+        email: email,
+        password: password
+    });
+
+    request.onload = () => {
+        if (request.status >= 200 && request.status < 400) {
+            console.log(JSON.parse(request.responseText));
+            window.location.href= "index.html";
+        } else {
+            console.log(`Error: ${request.status}`);
+            alert("Erro ao cadastrar usuário.");
         }
-        else{
-            const data = await response.json();
-            alert('Erro ao cadastrar:' +data.error);
-        }
+    };
+
+    request.onerror = () => {
+        alert("Erro ao cadastrar usuário.");
     }
-    catch (error){
-        alert('Erro ao enviar requisição: ' + error.message);
-    }
-});
+
+    request.send(body);
+};

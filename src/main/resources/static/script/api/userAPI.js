@@ -1,4 +1,4 @@
-// var auth = 'Basic ' + btoa('admin:admin')
+var auth = 'Basic ' + btoa('admin:admin')
 
 //RECEBE UM ID DE USUÁRIO
 export function getById(id) {
@@ -23,7 +23,7 @@ export function getById(id) {
 //NÃO RECEBE NADA
 export function getAll(auth) {
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://localhost:8081/api/private/user', true);
+    request.open('GET', 'http://localhost:8081/api/user/private', true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     request.setRequestHeader('Authorization', + auth);
 
@@ -97,7 +97,7 @@ export function getByEmail(email) {
 //RECEBE UM CORPO DE USUÁRIO
 export function postUser(username, email, password) {
     var request = new XMLHttpRequest();
-    request.open('POST', 'http://localhost:8081/api/public/user', true);
+    request.open('POST', 'http://localhost:8081/api/user', true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     request.setRequestHeader('Authorization', + auth);
 

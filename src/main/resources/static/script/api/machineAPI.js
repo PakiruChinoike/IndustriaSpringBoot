@@ -17,6 +17,25 @@ export function getById(id) {
     request.send();
 }
 
+//RECEBE UM ID DE USUÁRIO 
+export function getByUserId(id) {
+    var request = new XMLHttpRequest();
+    request.open('GET', `http://localhost:8081/api/machine/public/user/${id}`, true);
+    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    request.setRequestHeader('Authorization', + auth);
+    
+    request.onload = () => {
+        var data = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+            data.forEach(m => {
+                console.log(m.name);
+            });
+        }
+    }
+    
+    request.send();
+}
+
 //NÃO RECEBE NADA
 export function getAll() {
     var request = new XMLHttpRequest();
