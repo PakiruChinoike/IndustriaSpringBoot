@@ -1,6 +1,6 @@
-getAll();
-localStorage.removeItem("usuario")
-console.log(localStorage.getItem("usuario"))
+
+const userEmail = "jonas@pedro";
+getByUserEmail(userEmail);
 
 function getByUserEmail(email) {
     var request = new XMLHttpRequest();
@@ -9,10 +9,26 @@ function getByUserEmail(email) {
     
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200)         
-            console.log(JSON.parse(request.responseText)); 
+            var machines = JSON.parse(request.responseText);
+            console.log(machines);
+            machines.forEach(m => {
+                addUserMachines(m.id, m.name); 
+            });
         };
     
     request.send();
+}
+
+function addUserMachines(machineId, machineName) {
+
+    let machine = document.createElement("p");
+        machine.id = machineId;
+        
+    let text = document.createTextNode(machineName);
+        machine.appendChild(text);
+
+    document.getElementById("maquinadiv").appendChild(machine);
+
 }
 
 function getAll() {

@@ -2,12 +2,15 @@ package com.io.industry.industria.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -29,10 +32,9 @@ public class Produce {
     @Column(name = "produce_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "machine")
+    @ManyToMany()
     @JsonIgnore
-    private Machine machine;
+    private List<Machine> machine;
 
     @Column(name = "name")
     private String name;

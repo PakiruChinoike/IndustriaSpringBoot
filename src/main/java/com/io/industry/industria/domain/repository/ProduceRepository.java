@@ -12,7 +12,7 @@ import com.io.industry.industria.domain.entity.Produce;
 @Repository
 public interface ProduceRepository extends JpaRepository<Produce, Long>{
     
-    @Query(" select p from Produce p where p.machine=:id ") 
+    @Query(value = " SELECT * FROM produce p JOIN produce_machine pm ON p.produce_id = pm.produce_produce_id WHERE pm.machine_machine_id=:id", nativeQuery = true) 
     List<Produce> findByMachineId(@Param("id") Long machineId);
 
 }

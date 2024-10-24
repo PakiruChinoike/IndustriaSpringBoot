@@ -1,6 +1,7 @@
 package com.io.industry.industria.service.impl;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
@@ -83,17 +84,26 @@ public class ProduceServiceImpl implements ProduceService{
     }
 
     private Produce objectFromDto(ProduceDTO dto) {
-        Machine machine = machineRepository.findById(
-            dto.getMachineId()
-        ).orElseThrow(() -> new ServiceRuleException("Id de máquina não encontrado."));
+        List<Long> listIdMachine = dto.getMachineIdList();
+        List<Machine> listMachine = new ArrayList<Machine>();
+
+        for (Long id : listIdMachine) {
+            listMachine.add(
+                machineRepository.findById(id)
+                    .orElseThrow(
+                        () -> new ServiceRuleException("Id de máquina não encontrado"))
+            );
+        }
+        
 
         return Produce.builder()
-            .name(dto.getName())
-            .xLength(dto.getXLength())
-            .zLength(dto.getZLength())
-            .yLength(dto.getYLength())
-            .machine(machine)
-            .build();
+        .name(dto.getName())
+        .xLength(dto.getXLength())
+        .zLength(dto.getZLength())
+        .yLength(dto.getYLength())
+        .machine(listMachine)
+        .build();
+
     }
 
 }

@@ -14,8 +14,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
             var status = postUser(username, email, password);
 
-            localStorage.setItem("usuario", email);
-            console.log(localStorage.getItem("usuario"));
+            console.log(localStorage.getItem("user"));
 
             console.log(status);
 
@@ -40,9 +39,11 @@ function postUser(username, email, password) {
         if (request.status >= 200 && request.status < 400) {
             console.log(JSON.parse(request.responseText));
             window.location.href= "index.html";
+            localStorage.setItem("user", email);
         } else {
             console.log(`Error: ${request.status}`);
             alert("Erro ao cadastrar usuário.");
+            localStorage.setItem("user", email);
         }
     };
 

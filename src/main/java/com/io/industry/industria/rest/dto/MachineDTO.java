@@ -19,7 +19,7 @@ public class MachineDTO {
     @Length(max = 50, min = 4)
     private String name;
 
-    @Length(max = 50, min = 4)
+    @Length(max = 50, min = 2)
     private String model = "1.0";
 
     private List<Long> produceList;

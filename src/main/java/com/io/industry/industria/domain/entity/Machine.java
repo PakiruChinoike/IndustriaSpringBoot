@@ -14,8 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
@@ -73,7 +73,7 @@ public class Machine{
     private String name;
 
     //LISTA DE PRODUTOS QUE A MÁQUINA É CAPAZ DE PRODUZIR
-    @OneToMany(mappedBy = "machine")
+    @ManyToMany(mappedBy = "machine")
     private List<Produce> produce;
 
     //PRODUTO ATUAL SENDO PRODUZIDO PELA MÁQUINA

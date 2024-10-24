@@ -10,7 +10,7 @@
                 const data = JSON.parse(message.data);
                 const { userEmail } = data;
                 if (userEmail){
-                  localStorage.setItem('userEmail', userEmail);
+                  localStorage.setItem('user', userEmail);
                 }
               }
             });
