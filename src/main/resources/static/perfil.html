@@ -4,9 +4,44 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Perfil</title>
+        <script src="script\api\userAPI.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
+    <style>
+        body {
+      background-color: #f8f9fa;
+    }
+    </style>
     <body>
-        <h1>teste</h1>
+        <div class="container mt-4">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="card p-4">
+                <h1 class="text-center mb-4">Perfil</h1>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <strong>Nome Completo:</strong>
+                  </div>
+                  <div class="col-md-9">
+                    <span id="nomeUsuario"></span>
+                    
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <strong>Email:</strong>
+                  </div>
+                  <div class="col-md-9">
+                    <span id="emailUsuario"></span>
+                  </div>
+                </div>
+                <div class="text-center mt-4">
+                  <a href="index.html" class="w-100 btn btn-lg btn-success">Voltar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>
