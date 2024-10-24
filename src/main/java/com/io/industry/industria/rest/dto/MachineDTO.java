@@ -26,6 +26,8 @@ public class MachineDTO {
 
     private Long currentProduceId;
 
+    private Long userId;
+
     public MachineDTO(String name, String model) {
         this.name = name;
         this.model = model;

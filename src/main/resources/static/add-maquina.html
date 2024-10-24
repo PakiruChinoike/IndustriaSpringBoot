@@ -3,8 +3,19 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Máquina</title>
-        <script src="script\api\machineAPI.js" type="module"></script>
+        <title>Adicionar Máquina</title>
+        <script>
+            window.addEventListener('message', (message) => {
+              if (message.origin === 'index.html') {
+                const data = JSON.parse(message.data);
+                const { userEmail } = data;
+                if (userEmail){
+                  localStorage.setItem('user', userEmail);
+                }
+              }
+            });
+        </script>
+        <script src="./script/addMachine.js" type="module"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body>
@@ -16,7 +27,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Prensa</h5>
                             <p class="card-text">Máquina de prensagem</p>
-                            <button class="btn btn-lg btn-success btn-square ms-4 mt-4" onclick="selectMachine('Prensa')" type="button">Selecionar</button>
+                            <button id="button-prensa" class="btn btn-lg btn-success btn-square ms-4 mt-4" type="button">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -25,18 +36,11 @@
                         <div class="card-body">
                             <h5 class="card-title">Torno</h5>
                             <p class="card-text">Máquina de torneamento</p>
-                            <button class="btn btn-lg btn-success btn-square ms-4 mt-4" onclick="selectMachine('Torno')" type="button">Selecionar</button>
+                            <button id="button-torno" class="btn btn-lg btn-success btn-square ms-4 mt-4" type="button">Selecionar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script>
-            function selectMachine(nomeMaquina) {
-                localStorage.setItem('maquinaSelecionada', nomeMaquina);
-                window.location.href = 'index.html';
-            }
-        </script>
     </body>
 </html>

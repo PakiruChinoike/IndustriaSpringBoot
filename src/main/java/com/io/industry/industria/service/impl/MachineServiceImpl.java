@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.io.industry.industria.domain.entity.Machine;
 import com.io.industry.industria.domain.entity.MachineInfo;
 import com.io.industry.industria.domain.entity.Produce;
+import com.io.industry.industria.domain.entity.User;
 import com.io.industry.industria.domain.enums.Status;
 import com.io.industry.industria.domain.repository.MachineInfoRepository;
 import com.io.industry.industria.domain.repository.MachineRepository;
 import com.io.industry.industria.domain.repository.ProduceRepository;
+import com.io.industry.industria.domain.repository.UserRepository;
 import com.io.industry.industria.exception.ServiceRuleException;
 import com.io.industry.industria.rest.dto.MachineDTO;
 import com.io.industry.industria.service.MachineService;
@@ -28,6 +30,7 @@ public class MachineServiceImpl implements MachineService{
     private final MachineRepository repository;
     private final MachineInfoRepository infoRepository;
     private final ProduceRepository produceRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Machine findById(Long id) {
@@ -166,6 +169,7 @@ public class MachineServiceImpl implements MachineService{
     private Machine objectFromDto(MachineDTO dto) {
         Produce currentP;
         List<Produce> listProduce;
+        User user;
         MachineInfo info = infoRepository.save(new MachineInfo());
 
         if (dto.getCurrentProduceId()!=null) {
@@ -187,6 +191,14 @@ public class MachineServiceImpl implements MachineService{
             listProduce = new ArrayList<>();
         }
 
+        if (dto.getUserId()!=null) {
+            user = userRepository.findById(
+                dto.getUserId()
+            ).orElseThrow(() -> new ServiceRuleException("Id de usuário não encontrado."));
+        } else {
+            user = null;
+        }
+
         Machine machine = Machine.builder()
             .name(dto.getName())
             .model(dto.getModel())
@@ -196,6 +208,7 @@ public class MachineServiceImpl implements MachineService{
             .minuteRunning(0)
             .offTime(LocalDateTime.now())
             .currentInfo(info)
+            .user(user)
             .build();
 
         return machine;
