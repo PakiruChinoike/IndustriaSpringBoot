@@ -37,14 +37,14 @@ public class UserController {
         return service.findAll();
     }
 
-    @GetMapping("/private/username")
-    public List<User> getUserByUsernameLike(@RequestBody UserDTO dto) {
-        return service.findByUsernameLike(dto.getUsername());
+    @GetMapping("/private/username/{username}")
+    public List<User> getUserByUsernameLike(@PathVariable String username) {
+        return service.findByUsernameLike(username);
     }
 
-    @GetMapping("/private/email")
-    public User getUserByEmail(@RequestBody UserDTO dto) {
-        return service.findByEmail(dto.getEmail());
+    @GetMapping("/private/email/{email}")
+    public User getUserByEmail(@PathVariable String email) {
+        return service.findByEmail(email);
     }
 
     @PostMapping

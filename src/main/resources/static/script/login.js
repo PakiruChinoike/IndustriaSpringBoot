@@ -1,33 +1,41 @@
-const formLogin = document.getElementById('formLogin');
+window.addEventListener("DOMContentLoaded", (e) => {
+    const formLogin = document.getElementById("formLogin");
 
-formLogin.addEventListener('submit', async function(event){
-    event.preventDefault();
+    if (formLogin) {
 
-    const email = document.getElementById('inputEmail').value;
-    const password = document.getElementById('inputPassword').value;
-    const data = {
-        email: email,
-        password: password
-    };
+        formLogin.addEventListener('submit', async function(event){
+            event.preventDefault();
+    
+            const formData = new FormData(formLogin);
+    
+            var email = formData.get("inputEmail");
+            var password = formData.get("inputPassword");
 
-    try{
-        const response = await fetch ('localhost:8081/api/user',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            localStorage.setItem("user", email);
+
+            getByEmail(email, password);
         });
-
-        if(response.ok){
-            window.location.href = 'index.html';
-        }
-        else{
-            const errorData = await response.json();
-            alert('Erro ao logar:' +errorData.message);
-        }
-    }
-    catch (error){
-        alert('Erro ao enviar requisição: ' + error.message);
     }
 });
+
+function getByEmail(inputEmail, inputPassword) {
+    var request = new XMLHttpRequest();
+    request.open('GET', `http://localhost:8081/api/user/private/email/${inputEmail}`, true);
+    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    
+    request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200)         
+            var u = JSON.parse(request.responseText);
+            verificarCadastro(inputPassword, u.password);
+        };
+    
+    request.send();
+}
+
+function verificarCadastro(inputPassword, userPassword) {
+    if (inputPassword===userPassword) {
+        window.location.href= "index.html";
+    } else {
+        alert("Erro ao verificar usuário.");
+    }
+}

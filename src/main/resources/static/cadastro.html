@@ -37,7 +37,7 @@
       var userEmail = localStorage.getItem("user");
       console.log(userEmail);
       var data = {userEmail: userEmail};
-      var iframeEl = document.getElementById("iframe");
+      var iframeEl = document.getElementById("iFrameIndex");
       iframeEl.contentWindow.postMessage(JSON.stringify(data), 'index.html');
     };
   </script>
@@ -59,7 +59,7 @@
             <label for="inputPassword">Senha</label>
           </div>
           <input type="submit" class="w-100 btn btn-lg btn-success"/>
-          <iframe id="iframe" src="index.html" onsubmit="onFrameSubmit()"  style="width:0;height:0;border:none;position:absolute;"></iframe>
+          <iframe id="iFrameIndex" src="index.html" onsubmit="onFrameSubmit()"  style="width:0;height:0;border:none;position:absolute;"></iframe>
         </form>
       </div>
     </div>

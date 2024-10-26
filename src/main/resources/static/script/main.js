@@ -1,5 +1,4 @@
-
-const userEmail = "jonas@pedro";
+const userEmail = localStorage.getItem("user");
 getByUserEmail(userEmail);
 
 function getByUserEmail(email) {

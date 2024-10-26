@@ -12,12 +12,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
             var email = formData.get("inputEmail");
             var password = formData.get("inputPassword");
 
-            var status = postUser(username, email, password);
-
-            console.log(localStorage.getItem("user"));
-
-            console.log(status);
-
+            postUser(username, email, password);
         });
     }
 })
