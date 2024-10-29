@@ -1,46 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Adicionar Máquina</title>
-        <script>
-            window.addEventListener('message', (message) => {
-              if (message.origin === 'index.html') {
-                const data = JSON.parse(message.data);
-                const { userEmail } = data;
-                if (userEmail){
-                  localStorage.setItem('user', userEmail);
-                }
-              }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adicionar Máquina</title>
+    <script>
+        window.addEventListener('message', (message) => {
+          if (message.origin === 'index.html') {
+            const data = JSON.parse(message.data);
+            const { userEmail } = data;
+            if (userEmail){
+              localStorage.setItem('user', userEmail);
+            }
+          }
+        });
+        
+        function showForm(machineType) {
+            const existingForm = document.querySelector(".machine-form");
+            if (existingForm) {
+                existingForm.remove();
+            }
+
+            const form = document.createElement("form");
+            form.classList.add("machine-form", "mt-3");
+
+            const label = document.createElement("label");
+            label.textContent = `Nome da Máquina (${machineType}):`;
+            label.classList.add("form-label");
+
+            const input = document.createElement("input");
+            input.type = "text";
+            input.placeholder = `Digite o nome da ${machineType}`;
+            input.classList.add("form-control", "mb-2");
+
+            const selectLabel = document.createElement("label");
+            selectLabel.textContent = "Produto fabricado:";
+            selectLabel.classList.add("form-label");
+
+            const select = document.createElement("select");
+            select.classList.add("form-control", "mb-2");
+            const option1 = new Option("1", "1");
+            const option2 = new Option("2", "1");
+            const option3 = new Option("3", "1");
+
+            select.add(option1);
+            select.add(option2);
+            select.add(option3);
+
+            const submitButton = document.createElement("button");
+            submitButton.type = "submit";
+            submitButton.classList.add("btn", "btn-lg", "btn-success", "btn-square", "ms-4", "mt-4");
+            submitButton.textContent = "Salvar";
+
+            form.appendChild(label);
+            form.appendChild(input);
+            form.appendChild(selectLabel);
+            form.appendChild(select);
+            form.appendChild(submitButton);
+
+            const buttonContainer = document.getElementById(`button-${machineType.toLowerCase()}`).parentNode;
+            buttonContainer.appendChild(form);
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const machineName = input.value;
+                const machineTypeSelected = select.value;
+
+                addMachine(machineName, machineTypeSelected);
+                form.remove();
             });
-        </script>
-        <script src="./script/addMachine.js" type="module"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class="container mt-5">
-            <h3> Escolha uma máquina que deseja adicionar:</h3>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Prensa</h5>
-                            <p class="card-text">Máquina de prensagem</p>
-                            <button id="button-prensa" class="btn btn-lg btn-success btn-square ms-4 mt-4" type="button">Selecionar</button>
-                        </div>
+        }
+
+        function addMachine(name, type) {
+            var request = new XMLHttpRequest();
+            request.open('POST', 'http://localhost:8081/api/machine', true);
+            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+            var body = JSON.stringify({
+                name: name, 
+                type: type
+            });
+
+            request.onload = () => {
+                if (request.status >= 200 && request.status < 400) {
+                    alert(`Máquina "${name}" (${type}) adicionada com sucesso!`);
+                    console.log(JSON.parse(request.responseText));
+                } else {
+                    console.log(`Error: ${request.status}`);
+                }
+            };
+
+            request.send(body);
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Escolha uma máquina que deseja adicionar:</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Prensa</h5>
+                        <p class="card-text">Máquina de prensagem</p>
+                        <button id="button-prensa" class="btn btn-lg btn-success btn-square ms-4 mt-4" type="button" onclick="showForm('Prensa')">Selecionar</button>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Torno</h5>
-                            <p class="card-text">Máquina de torneamento</p>
-                            <button id="button-torno" class="btn btn-lg btn-success btn-square ms-4 mt-4" type="button">Selecionar</button>
-                        </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Torno</h5>
+                        <p class="card-text">Máquina de torneamento</p>
+                        <button id="button-torno" class="btn btn-lg btn-success btn-square ms-4 mt-4" type="button" onclick="showForm('Torno')">Selecionar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
