@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .info-card {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .card-green {
+            background-color: #008000; /* Verde */
+        }
+        .card-blue {
+            background-color: #0dcaf0; /* Azul */
+        }
+        .card-purple {
+            background-color: #6f42c1; /* Roxo */
+        }
+        .card-gray {
+            background-color: #6c757d; /* Cinza */
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .gauge {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            color: #343a40;
+        }
+        .chart-container {
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <h2 class="text-center">Máquina</h2>
+        <div id="machineInfoContainer" class="row">
+            <div class="col-md-4">
+                <div class="info-card card-green">
+                    <p><strong>Paradas programadas:</strong> 00:30:00 (Manutenção Preventiva)</p>
+                    <p><strong>Paradas não programadas:</strong> 01:15:00 (Falhas Mecânicas)</p>
+                </div>
+                <div class="info-card card-gray">
+                    <p><strong>Próxima parada automática:</strong> 12:45:00 em 01:28:06</p>
+                </div>
+                <div class="info-card card-gray">
+                    <p><strong>Programar próxima parada:</strong> 00:00:00</p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="section-title">Temperatura monitorada</div>
+                <div class="chart-container bg-light">
+                    <p class="text-center">[Gráfico de Temperatura Monitorada]</p>
+                </div>
+                <div class="section-title">Temperatura prevista</div>
+                <div class="chart-container bg-light">
+                    <p class="text-center">[Gráfico de Temperatura Prevista]</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-3 text-center">
+                <div class="section-title">QUALIDADE</div>
+                <div class="gauge">98%</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="section-title">DISPONIBILIDADE</div>
+                <div class="gauge">98%</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="section-title">PERFORMANCE</div>
+                <div class="gauge">98%</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
