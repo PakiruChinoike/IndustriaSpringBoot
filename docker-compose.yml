@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:9.1.0
+    restart: always
+    container_name: app-mysql
+    env_file: ./stack.env
+    environment:
+       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+       MYSQL_DATABASE: ${DB_DATABASE_NAME}
+       MYSQL_USER: ${DB_USER}
+       MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports: ['${DB_PORT_LOCAL}:${DB_PORT_DOCKER}']
+  web:
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: projetoindustria/industria-server:1.0
+    restart: always
+    ports: ['${WEB_PORT_LOCAL}:${WEB_PORT_DOCKER}']
+    environment:
+       SPRING_DATASOURCE_URL: jdbc:mysql://${IP}:${DB_PORT_DOCKER}/${DB_DATABASE_NAME}
+       SPRING_DATASOURCE_USERNAME: ${DB_USER}
+       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+       SPRING_SERVER_PORT: ${WEB_PORT_LOCAL}
+       SYS_USER: ${SYS_USER}
+       SYS_PASSWD: ${SYS_PASSWD}
+       SYS_ADM_USER: ${SYS_ADM_USER}
+       SYS_ADM_PASSWD: ${SYS_ADM_PASSWD}
+volumes:
+  dbdata:
