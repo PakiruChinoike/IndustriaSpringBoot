@@ -15,7 +15,7 @@
 	<name>industria</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>23</java.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -87,65 +87,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-  				<groupId>org.apache.maven.plugins</groupId>
-  				<artifactId>maven-compiler-plugin</artifactId>
-  				<configuration>
-    					<source>${java.version}</source>
-    					<target>${java.version}</target>
-    					<compilerArgument>-Xlint:unchecked</compilerArgument>
-    					<showDeprecation>true</showDeprecation>
-    					<showWarnings>true</showWarnings>
-    					<annotationProcessorPaths>
-      						<path>
-        						<groupId>org.projectlombok</groupId>
-        						<artifactId>lombok</artifactId>
-        						<version>${lombok.version}</version>
-      						</path>
-					</annotationProcessorPaths>
-  				</configuration>
-			</plugin>
-			<plugin>
-  				<groupId>org.projectlombok</groupId>
-  				<artifactId>lombok-maven-plugin</artifactId>
-  				<configuration>
-    					<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-    					<outputDirectory>${delombok.output}</outputDirectory>
-    					<addOutputDirectory>false</addOutputDirectory>
-  				</configuration>
-  				<executions>
-   					<execution>
-      						<phase>generate-sources</phase>
-      						<goals>
-        						<goal>delombok</goal>
-      						</goals>
-    					</execution>
- 	 			</executions>
-			</plugin>
-			<plugin>
-  				<artifactId>maven-javadoc-plugin</artifactId>
-  				<extensions>true</extensions>
-  				<executions>
-    					<execution>
-      						<phase>compile</phase>
-      						<goals>
-        						<goal>javadoc-no-fork</goal>
-      						</goals>
-    					</execution>
-    					<execution>
-      						<id>attach-javadocs</id>
-      							<goals>
-        							<goal>jar</goal>
-      							</goals>
-    					</execution>
-  				</executions>
-  				<configuration>
-    					<reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
-    					<useStandardDocletOptions>false</useStandardDocletOptions>
-    					<show>package</show>
-    					<sourcepath>${delombok.output}</sourcepath>
-  				</configuration>
 			</plugin>
 		</plugins>
 	</build>
