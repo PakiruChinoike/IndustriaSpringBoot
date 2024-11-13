@@ -91,7 +91,6 @@
 			<plugin>
   				<groupId>org.apache.maven.plugins</groupId>
   				<artifactId>maven-compiler-plugin</artifactId>
-  				<version>${maven.compiler.plugin.version}</version>
   				<configuration>
     					<source>${java.version}</source>
     					<target>${java.version}</target>
@@ -110,7 +109,6 @@
 			<plugin>
   				<groupId>org.projectlombok</groupId>
   				<artifactId>lombok-maven-plugin</artifactId>
-  				<version>${lombok-maven-plugin.version}</version>
   				<configuration>
     					<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
     					<outputDirectory>${delombok.output}</outputDirectory>
