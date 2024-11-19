@@ -70,5 +70,13 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         }
+        stage('Deploy on server') { 
+            steps { 
+                 sshagent (credentials: ['ssh-cred']) {
+                    sh 'ssh $SSH_USER@$SSH_IP -p $SSH_PORT uname -a'
+                  }
+            }
+        }
+
     }
 }
